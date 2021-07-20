@@ -3,12 +3,18 @@ import './App.css';
 import {useState} from 'react'
 
 const App = () => {
+  const [inputValue, setInputValue] = useState('');
   const [isPal, setIsPal] = useState(false)
 
   const handleChange = (evnt) => {
     // console.log('Inputting...')
     // console.log(isPalindrome(evnt.target.value))
     let inputValue = evnt.target.value;
+    isPalindrome(inputVal)
+  }
+
+  const handleSubmit = (evnt) => {
+    evnt.preventDefault();
     isPalindrome(inputValue)
   }
 
@@ -27,15 +33,23 @@ const App = () => {
         right--;
       }
     }
-    return true;
+    return setIsPal(true);
   }
+
+    console.log("INPUT VALUE: ", inputValue)
     
     return (
       <div className="App">
         <h1>Is this a palindrome?</h1>
-        <input type='text' name='palindrome' onChange={handleChange}/>
+        <form onSubmit={handleSubmit}>
+        <input type='text' name='palindrome' onChange={handleChange} />
+        <div>
+          <button type='submit'>Submit</button>
+        </div>
+        </form>
         <h1>
-          { isPal ? 'True': 'False'}</h1>
+          { isPal ? 'True': 'False'}
+        </h1>
       </div>
     );
   }
